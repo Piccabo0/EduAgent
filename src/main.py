@@ -47,46 +47,40 @@ def main():
 
     # 4. 单次生成回答
     generator = ResponseGenerator()
-    query = "哆啦A梦使用的3个秘密道具分别是什么？"
-    retrieved_chunks = retriever.retrieve(query, 5)
-    reranked_chunks = reranker.rerank(query, retrieved_chunks, 3)
-    answer = generator.generate(query, reranked_chunks)
-    print(answer)
+    # query = "什么是滑动摩擦力？"
+    # retrieved_chunks = retriever.retrieve(query, 5)
+    # reranked_chunks = reranker.rerank(query, retrieved_chunks, 3)
+    # answer = generator.generate(query, reranked_chunks)
+    # print(answer)
 
-    # # 4. 交互循环
-    # print("\n" + "=" * 60)
-    # print("进入交互模式（输入 'quit' 退出）")
-    # print("=" * 60)
+    # 4. 交互循环
+    print("\n" + "=" * 60)
+    print("进入交互模式（输入 'quit' 退出）")
+    print("=" * 60)
     
-    # while True:
-    #     query = input("\n请输入问题: ").strip()
+    while True:
+        query = input("\n请输入问题: ").strip()
         
-    #     if query.lower() in ['quit', 'exit', 'q']:
-    #         print("感谢使用，再见！")
-    #         break
+        if query.lower() in ['quit', 'exit', 'q']:
+            break
         
-    #     if not query:
-    #         continue
+        if not query:
+            continue
         
-    #     # 4.1 召回
-    #     print("\n[4.1] 召回相关文本...")
-    #     retrieved_chunks = retriever.retrieve(query, top_k=5)
-    #     print(f"   检索到 {len(retrieved_chunks)} 个相关文本块")
+        # 4.1 召回
+        retrieved_chunks = retriever.retrieve(query, top_k=5)
         
-    #     # 4.2 重排
-    #     print("\n[4.2] 重排文本块...")
-    #     reranked_chunks = reranker.rerank(query, retrieved_chunks, top_k=3)
-    #     print(f"   重排后保留 {len(reranked_chunks)} 个最相关的文本块")
+        # 4.2 重排
+        reranked_chunks = reranker.rerank(query, retrieved_chunks, top_k=3)
         
-    #     # 4.3 生成
-    #     print("\n[4.3] 生成回答...")
-    #     answer = generator.generate(query, reranked_chunks)
+        # 4.3 生成
+        answer = generator.generate(query, reranked_chunks)
         
-    #     print("\n" + "-" * 60)
-    #     print("回答:")
-    #     print("-" * 60)
-    #     print(answer)
-    #     print("-" * 60)
+        print("\n" + "-" * 60)
+        print("回答:")
+        print("-" * 60)
+        print(answer)
+        print("-" * 60)
 
 
 if __name__ == "__main__":
