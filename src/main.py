@@ -74,7 +74,7 @@ def main():
         reranked_chunks = reranker.rerank(query, retrieved_chunks, top_k=3)
         
         # 4.3 生成
-        answer = generator.generate(query, reranked_chunks)
+        answer = generator.generate(query, reranked_chunks[0])
         
         print("\n" + "-" * 60)
         print("回答:")

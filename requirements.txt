@@ -1,6 +1,6 @@
 sentence-transformers
 chromadb
-google-genai
+openai
 python-dotenv
 numpy
 torch
