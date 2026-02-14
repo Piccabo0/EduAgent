@@ -16,6 +16,10 @@ if HF_TOKEN:
 else:
     print("⚠ Warning: HF_TOKEN not found in environment variables")
 
+# 禁用一些详细输出
+os.environ["TOKENIZERS_PARALLELISM"] = "false"  # 禁用tokenizer并行警告
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"  # 减少transformers输出
+
 # 添加src目录到路径
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
@@ -48,8 +52,9 @@ except Exception as e:
     TEMP_DIR = None
 
 # 配置日志
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.WARNING)  # 只显示警告和错误
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)  # 但保持我们自己的日志为INFO级别
 
 # ===== 会话存储管理器 =====
 class ConversationManager:
@@ -190,12 +195,12 @@ class EduAgentWrapper:
             
             # 1. 分片
             chunks = split_into_chunks(doc_file)
-            logger.info(f"文档分片完成，共 {len(chunks)} 个片段")
+            logger.info(f"知识库文档分片完成，共 {len(chunks)} 个片段")
             
             # 2. 索引
             indexer = VectorIndexer()
             indexer.build_index(chunks)
-            logger.info("向量索引构建完成")
+            logger.info("知识库向量索引构建完成")
             
             # 3. 初始化组件
             self.retriever = Retriever(indexer)
@@ -366,7 +371,7 @@ def create_conversation():
         session_id = str(uuid.uuid4())
         conversation = {
             '_id': session_id,
-            'title': data.get('title', f'新对话 {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'),
+            'title': data.get('title', f'对话 {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}'),
             'messages': data.get('messages', []),
             'created_at': datetime.now().isoformat(),
             'updated_at': datetime.now().isoformat()
