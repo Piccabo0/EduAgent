@@ -4,3 +4,6 @@ openai
 python-dotenv
 numpy
 torch
+flask
+flask-cors
+python-dotenv

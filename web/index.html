@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduAgent - 智能教育助手</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧对话历史侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="new-conversation-btn" onclick="startNewConversation()">
+                    <i class="fas fa-plus"></i>
+                    <span>New chat</span>
+                </button>
+                <button class="sidebar-toggle" onclick="toggleSidebar()" title="Collapse">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="conversations-section">
+                <div class="conversations-title">Chats</div>
+                <div class="conversations-list" id="conversationsList">
+                    <!-- 对话历史将在这里显示 -->
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主要内容区 -->
+        <main class="main-content">
+            <!-- 左上角标识 -->
+            <div class="app-logo">
+                <!-- <i class="fas fa-robot"></i> -->
+                <span>EduAgent</span>
+            </div>
+            
+            <!-- 主聊天区域 -->
+            <div class="chat-area no-messages">
+                <!-- 欢迎信息 -->
+                <div class="welcome-section">
+                    <h1>Hi Piccaboo</h1>
+                    <p>I'm ready to help you study physics, bring ideas and more.</p>
+                </div>
+                
+                <!-- 聊天消息容器 -->
+                <div class="chat-messages" id="chatMessages">
+                    <!-- 动态消息将在这里显示 -->
+                </div>
+                
+                <!-- 输入区域 -->
+                <div class="input-section">
+                    <form class="input-form" id="inputForm">
+                        <div class="input-wrapper">
+                            <textarea 
+                                   id="questionInput" 
+                                   placeholder="Ask EduAgent" 
+                                   autocomplete="off"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- 加载指示器 -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Thinking...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
